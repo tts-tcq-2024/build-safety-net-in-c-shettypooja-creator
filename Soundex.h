@@ -1,40 +1,57 @@
 #ifndef SOUNDEX_H
 #define SOUNDEX_H
 
-#include "Soundex.h"
 #include <ctype.h>
 #include <string.h>
 
-char getSoundexCode(char c) {
-    c = toupper(c);
-    switch (c) {
-        case 'B': case 'F': case 'P': case 'V': return '1';
-        case 'C': case 'G': case 'J': case 'K': case 'Q': case 'S': case 'X': case 'Z': return '2';
-        case 'D': case 'T': return '3';
-        case 'L': return '4';
-        case 'M': case 'N': return '5';
-        case 'R': return '6';
-        default: return '0'; // For A, E, I, O, U, H, W, Y
+// Create a lookup table for Soundex codes
+char soundexTable[26] = {
+    '0', '1', '2', '3', '0', '1', '2', '0', '0', '2', // A-J
+    '2', '4', '5', '5', '0', '1', '2', '6', '2', '3', // K-T
+    '0', '1', '0', '2', '0', '2'                      // U-Z
+};
+
+char getSoundexCode(char c) 
+{
+    if (isalpha(c)) 
+    {
+        return soundexTable[toupper(c) - 'A'];
+    }
+    return '0';
+}
+
+void append_to_soundex(char code,int *sIndex,char *soundex)
+{
+    soundex[*sIndex] = code;
+    *sIndex += (code != '0' && code != soundex[*sIndex - 1]);
+    
+}
+
+void processSoundex(const char *name,int len,int *sIndex,char *soundex)
+{
+    int i = 1;
+    while (i < len && *sIndex < 4) 
+    {
+        char code = getSoundexCode(name[i]);
+        append_to_soundex(code,sIndex,soundex);       
+        i++;
     }
 }
 
-void generateSoundex(const char *name, char *soundex) {
+void generateSoundex(const char *name, char *soundex) 
+{
     int len = strlen(name);
     soundex[0] = toupper(name[0]);
     int sIndex = 1;
 
-    for (int i = 1; i < len && sIndex < 4; i++) {
-        char code = getSoundexCode(name[i]);
-        if (code != '0' && code != soundex[sIndex - 1]) {
-            soundex[sIndex++] = code;
-        }
-    }
-
-    while (sIndex < 4) {
+    processSoundex(name,len,&sIndex,soundex);
+    
+    while (sIndex < 4) 
+    {
         soundex[sIndex++] = '0';
     }
 
     soundex[4] = '\0';
 }
 
-#endif // SOUNDEX_H
+#endif // SOUNDEX_
