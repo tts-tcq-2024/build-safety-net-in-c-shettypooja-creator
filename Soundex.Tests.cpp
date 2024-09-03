@@ -33,7 +33,7 @@ TEST(SoundexTest_cases, GenerateSoundex) {
     EXPECT_STREQ(soundex, "1320");
 
     generateSoundex("IPDM", soundex); //less than 4 characters
-    EXPECT_STREQ(soundex, "T200");
+    EXPECT_STREQ(soundex, "I135");
 
     generateSoundex("", soundex); //Empty condition
     EXPECT_STREQ(soundex, "");
