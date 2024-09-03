@@ -21,16 +21,16 @@ TEST(SoundexTest_cases, GenerateSoundex) {
     char soundex[5];
 
     generateSoundex("India", soundex);
-    EXPECT_STREQ(soundex, "A201");
+    EXPECT_STREQ(soundex, "I530");
 
     generateSoundex("Pooja", soundex); 
-    EXPECT_STREQ(soundex, "U520");
+    EXPECT_STREQ(soundex, "P200");
 
     generateSoundex("c1y2c3h4", soundex); // alpha numnerical
-    EXPECT_STREQ(soundex, "J500");
+    EXPECT_STREQ(soundex, "C200");
 
     generateSoundex("123KLT", soundex); //numerical value first
-    EXPECT_STREQ(soundex, "1320");
+    EXPECT_STREQ(soundex, "1234");
 
     generateSoundex("IPDM", soundex); //less than 4 characters
     EXPECT_STREQ(soundex, "I135");
