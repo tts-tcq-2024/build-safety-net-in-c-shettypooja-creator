@@ -1,0 +1,9 @@
+﻿Test Case Id,Test Case Name,Input,Expected Output,Description
+TC1,"SoundexTest_numerical, GetSoundexCode",'1','0',Test that numerical values (like '1') return the default '0' value in Soundex conversion.
+TC2,"SoundexTest_cases, GenerateSoundex India","""India""","""I530""","Test that the Soundex code for ""India"" is properly generated."
+TC3,"SoundexTest_cases, GenerateSoundex Pooja","""Pooja""","""P200""","Test that the Soundex code for ""Pooja"" is correctly generated."
+TC4,"SoundexTest_cases, GenerateSoundex alphanumeric","""c1y2c3h4""","""C200""",Test that the Soundex function handles alphanumeric input correctly by ignoring digits and converting letters.
+TC5,"SoundexTest_cases, GenerateSoundex numbers first","""123KLT""","""1243""","Test that the Soundex handles inputs starting with numbers, returning the appropriate Soundex code for the input."
+TC6,"SoundexTest_cases, GenerateSoundex short string","""IPDM""","""I135""",Test that Soundex code generation works for a string with fewer than four characters.
+TC7,"SoundexTest_cases, GenerateSoundex empty","""""","""""",Test that the Soundex function handles an empty string as input and returns an empty string.
+TC8,"SoudexTestsuite, ReplacesConsonantsWithAppropriateDigits","""AX""","""A200""",Test that consonants are correctly replaced by the appropriate digits in the Soundex algorithm.
